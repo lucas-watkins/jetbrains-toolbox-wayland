@@ -1,4 +1,4 @@
-# JetBrains Toolbox 3.6.4 native Wayland patch
+# JetBrains Toolbox 3.6.4 native Wayland patch (Linux)
 
 This patch runs the Linux tar build of JetBrains Toolbox 3.6.4.86641 directly
 on Wayland, without X11 or XWayland.
