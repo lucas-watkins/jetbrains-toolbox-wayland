@@ -1,11 +1,12 @@
 #!/bin/sh
-# Patch an untouched JetBrains Toolbox 3.6.4.86641 Linux tar installation for
+# Patch an untouched JetBrains Toolbox Linux tar installation for
 # native Wayland rendering. Copy this file into the bundle's bin directory and
 # run it there. Run with --rollback to restore the original vendor files.
 set -eu
 
-ELF_SHA256='854871ccaf210473f03d3684620da8aa10f63129704857b6279dc8913220cc5f'
-JAR_SHA256='139748747703d602d8e4d33b5884bb54ad0b6f23e5d98d69d8f1b18b08ed8691'
+TOOLBOX_VERSION="3.8.1.88030"
+ELF_SHA256='9e3fc1ad90595699f00945c934221d7f02164f08c03f6fcfea00ad50fe119529'
+JAR_SHA256='f19f167c0e27998d7066239973279cbe2d5bed85ed25984537cf02ea2bf19d8c'
 JAR_REL='lib/ui-desktop-1.10.0-SNAPSHOT+data-source-prototype-1-10-0-beta02.jar'
 CLASS_REL='androidx/compose/ui/awt/ComposeWindowPanel.class'
 
@@ -46,7 +47,7 @@ test -f jetbrains-toolbox || fail 'run this script from the Toolbox bin director
 test -f "$JAR_REL" || fail "$JAR_REL is missing"
 test ! -e jetbrains-toolbox.vendor || fail 'jetbrains-toolbox.vendor already exists; this does not look like a fresh install'
 test ! -e "$JAR_REL.vendor" || fail "$JAR_REL.vendor already exists; this does not look like a fresh install"
-test "$(sha256 jetbrains-toolbox)" = "$ELF_SHA256" || fail 'unknown launcher checksum; expected Toolbox 3.6.4.86641'
+test "$(sha256 jetbrains-toolbox)" = "$ELF_SHA256" || fail "unknown launcher checksum; expected Toolbox $TOOLBOX_VERSION"
 test "$(sha256 "$JAR_REL")" = "$JAR_SHA256" || fail 'unknown ui-desktop JAR checksum; refusing to patch it'
 
 WORK_DIR=$(mktemp -d /tmp/toolbox-native-wayland.XXXXXX)
@@ -216,5 +217,5 @@ fi
 test -x jetbrains-toolbox
 test -x jetbrains-toolbox.vendor
 test -r "$JAR_REL"
-printf '%s\n' 'Installed the native Wayland patch for JetBrains Toolbox 3.6.4.86641.'
+printf '%s\n' "Installed the native Wayland patch for JetBrains Toolbox $TOOLBOX_VERSION."
 printf '%s\n' 'Rollback: ./install-native-wayland.sh --rollback'

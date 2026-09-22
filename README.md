@@ -1,6 +1,6 @@
-# JetBrains Toolbox 3.6.4 native Wayland patch (Linux)
+# JetBrains Toolbox 3.8.1 native Wayland patch (Linux)
 
-This patch runs the Linux tar build of JetBrains Toolbox 3.6.4.86641 directly
+This patch runs the Linux tar build of JetBrains Toolbox 3.8.1.88030 directly
 on Wayland, without X11 or XWayland.
 
 It is useful on Wayland-only systems, when XWayland is intentionally disabled,
@@ -15,7 +15,7 @@ Copy [install-native-wayland.sh](./install-native-wayland.sh) into the fresh
 bundle's `bin` directory, then run it from there:
 
 ```sh
-cd jetbrains-toolbox-3.6.4.86641/bin
+cd jetbrains-toolbox-3.8.1.88030/bin
 chmod +x install-native-wayland.sh
 ./install-native-wayland.sh
 ```
@@ -35,14 +35,14 @@ The installer then makes two targeted changes:
    socket exists, removes `DISPLAY`, sets `-Dawt.toolkit.name=WLToolkit`, and
    forwards every argument to the backed-up vendor executable.
 
-The installer checks the exact SHA-256 hashes for Toolbox 3.6.4.86641 before it
+The installer checks the exact SHA-256 hashes for Toolbox 3.8.1.88030 before it
 writes anything. It refuses to patch another release or an already modified
 bundle. Toolbox updates may replace the patched files, in which case use an
 installer made for the new version rather than bypassing the checksum check.
 
 ## Requirements
 
-- A freshly extracted Linux tar bundle of JetBrains Toolbox 3.6.4.86641
+- A freshly extracted Linux tar bundle of JetBrains Toolbox 3.8.1.88030
 - A working Wayland session (`WAYLAND_DISPLAY` and `XDG_RUNTIME_DIR` set)
 - Standard command-line tools: `sha256sum`, `unzip`, and `grep`
 - A full JDK 21, used to compile the embedded ASM bytecode patcher
